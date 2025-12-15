@@ -64,5 +64,3 @@ Implementada via tipo CSL **`software`**, com os campos:
 - Data de acesso
 
 ---
-
-1. Copie a URL abaixo:
