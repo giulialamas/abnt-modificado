@@ -215,7 +215,11 @@
   <!-- Local/Editora: [S. l.], [s. n.], e [S. l.: s. n.] em itálico quando ambos ausentes -->
 <macro name="publisher">
   <choose>
+
+    <!-- Caso exista local OU editora -->
     <if variable="publisher-place publisher" match="any">
+
+      <!-- LOCAL -->
       <choose>
         <if variable="publisher-place">
           <text variable="publisher-place" suffix=": "/>
@@ -225,6 +229,7 @@
         </else>
       </choose>
 
+      <!-- EDITORA -->
       <choose>
         <if variable="publisher">
           <text variable="publisher" suffix=", "/>
@@ -235,17 +240,29 @@
           <text macro="issued"/>
         </else>
       </choose>
+
     </if>
 
+    <!-- Caso NÃO exista local NEM editora -->
     <else>
-      <!-- Ambos ausentes: colchetes SEM itálico; conteúdo em itálico -->
-      <group suffix=", ">
-        <text value="["/>
-        <text value="S. l.: s. n." font-style="italic"/>
-        <text value="]"/>
-      </group>
+
+      <!-- Colchetes FORÇADOS como normal -->
+      <text value="[" font-style="normal"/>
+
+      <!-- Conteúdo em itálico -->
+      <text value="S. l.: s. n." font-style="italic"/>
+
+      <!-- Colchetes FORÇADOS como normal -->
+      <text value="]" font-style="normal"/>
+
+      <!-- Separador padrão ABNT -->
+      <text value=", "/>
+
+      <!-- Ano -->
       <text macro="issued"/>
+
     </else>
+
   </choose>
 </macro>
 
