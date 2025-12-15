@@ -103,3 +103,57 @@ No painel lateral do Mendeley Cite:
 4. Cole a URL abaixo:
 
 ---
+
+## 🛠 Opção complementar — Macro do Word para itálico em *et al.* (Mendeley Cite)
+
+### Contexto
+Embora o estilo CSL esteja corretamente configurado para aplicar itálico em *et al.* (conforme ABNT NBR 10520 / 6023), o **Mendeley Cite (suplemento do Word)** apresenta limitações conhecidas na renderização tipográfica de citações no texto, podendo ignorar a formatação definida no CSL.
+
+Como alternativa **opcional**, **segura** e amplamente aceita em ambiente acadêmico, pode-se utilizar uma **macro do Microsoft Word** para aplicar itálico em *et al.* **após a finalização do texto**.
+
+> ✔️ Não altera campos do Mendeley  
+> ✔️ Não interfere na lógica das citações  
+> ✔️ Aceita em dissertações, teses e artigos científicos  
+
+---
+
+### Como instalar a macro
+
+1. No **Microsoft Word**, pressione:
+   - **Windows**: `Alt + F11`
+   - **macOS**: `Option + Fn + F11`
+
+2. No **Editor VBA**:
+   - Clique em **Insert → Module**
+   - Um novo módulo em branco será criado
+
+3. Cole o código da macro (abaixo) dentro do módulo
+
+4. Feche o editor VBA e retorne ao Word
+
+---
+
+### Macro Word — aplicar itálico em *et al.*
+
+```vba
+Sub ItalicizeEtAl()
+    Dim rng As Range
+
+    Set rng = ActiveDocument.Content
+
+    With rng.Find
+        .ClearFormatting
+        .Text = "et al."
+        .Replacement.ClearFormatting
+        .Replacement.Font.Italic = True
+        .Replacement.Text = "et al."
+        .Forward = True
+        .Wrap = wdFindContinue
+        .Format = True
+        .MatchCase = False
+        .MatchWholeWord = True
+        .MatchWildcards = False
+        .Execute Replace:=wdReplaceAll
+    End With
+End Sub
+
