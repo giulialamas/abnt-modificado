@@ -213,35 +213,42 @@
   </macro>
 
   <!-- Local/Editora: [S. l.], [s. n.], e [S. l.: s. n.] em itálico quando ambos ausentes -->
-  <macro name="publisher">
-    <choose>
-      <if variable="publisher-place publisher" match="any">
-        <choose>
-          <if variable="publisher-place">
-            <text variable="publisher-place" suffix=": "/>
-          </if>
-          <else>
-            <text value="[S. l.]" suffix=": "/>
-          </else>
-        </choose>
-        <choose>
-          <if variable="publisher">
-            <text variable="publisher" suffix=", "/>
-            <text macro="issued"/>
-          </if>
-          <else>
-            <text value="[s. n.]" suffix=", "/>
-            <text macro="issued"/>
-          </else>
-        </choose>
-      </if>
+<macro name="publisher">
+  <choose>
+    <if variable="publisher-place publisher" match="any">
+      <choose>
+        <if variable="publisher-place">
+          <text variable="publisher-place" suffix=": "/>
+        </if>
+        <else>
+          <text value="[S. l.]" suffix=": "/>
+        </else>
+      </choose>
 
-      <else>
-        <text value="[S. l.: s. n.]" font-style="italic" suffix=", "/>
-        <text macro="issued"/>
-      </else>
-    </choose>
-  </macro>
+      <choose>
+        <if variable="publisher">
+          <text variable="publisher" suffix=", "/>
+          <text macro="issued"/>
+        </if>
+        <else>
+          <text value="[s. n.]" suffix=", "/>
+          <text macro="issued"/>
+        </else>
+      </choose>
+    </if>
+
+    <else>
+      <!-- Ambos ausentes: colchetes SEM itálico; conteúdo em itálico -->
+      <group suffix=", ">
+        <text value="["/>
+        <text value="S. l.: s. n." font-style="italic"/>
+        <text value="]"/>
+      </group>
+      <text macro="issued"/>
+    </else>
+  </choose>
+</macro>
+
 
   <macro name="event">
     <choose>
