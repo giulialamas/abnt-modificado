@@ -65,8 +65,4 @@ Implementada via tipo CSL **`software`**, com os campos:
 
 ---
 
-## 🚀 Como usar no Mendeley (ATUAL)
-
-### ✔ Método oficial (via URL)
-
 1. Copie a URL abaixo:
