@@ -34,14 +34,6 @@
         <single>ed</single>
         <multiple>eds</multiple>
       </term>
-      <term name="container-author" form="short">
-        <single>ed</single>
-        <multiple>eds</multiple>
-      </term>
-      <term name="collection-editor" form="short">
-        <single>ed</single>
-        <multiple>eds</multiple>
-      </term>
     </terms>
   </locale>
 
@@ -54,7 +46,7 @@
   <macro name="container-contributors">
     <choose>
       <if type="chapter">
-        <names variable="container-author" delimiter=", ">
+        <names variable="editor" delimiter=", ">
           <name name-as-sort-order="all"
                 sort-separator=", "
                 initialize-with=". "
@@ -73,20 +65,6 @@
                  text-case="capitalize-first"/>
 
           <substitute>
-            <names variable="editor">
-              <name name-as-sort-order="all"
-                    sort-separator=", "
-                    initialize-with=". "
-                    delimiter="; "
-                    delimiter-precedes-last="always"
-                    et-al-min="4"
-                    et-al-use-first="1">
-                <name-part name="family" text-case="uppercase"/>
-                <name-part name="given" text-case="uppercase"/>
-                <et-al font-style="italic"/>
-              </name>
-            </names>
-
             <names variable="collection-editor">
               <name name-as-sort-order="all"
                     sort-separator=", "
@@ -542,29 +520,14 @@
           </group>
         </else-if>
 
-        <else-if type="webpage">
+        <!-- Conteúdo online (inclui software/IA quando cadastrado como webpage) -->
+        <else-if type="webpage post-weblog" match="any">
           <group>
             <text macro="author" suffix=". "/>
             <text macro="title" suffix=". "/>
+            <text variable="version" prefix="Versão " suffix=". "/>
             <text macro="genre" suffix=". "/>
             <text macro="access" suffix=""/>
-          </group>
-        </else-if>
-
-        <!-- Software / IA: Autor. Título. Versão. Local, data. Modelo (genre). URL + Acesso -->
-        <else-if type="software">
-          <group>
-            <text macro="author" suffix=". "/>
-            <text variable="title" suffix=". "/>
-            <text variable="version" prefix="Versão " suffix=". "/>
-            <text macro="place" suffix=", "/>
-            <date variable="issued">
-              <date-part name="day" suffix=" "/>
-              <date-part name="month" form="short" suffix=" "/>
-              <date-part name="year" suffix=". "/>
-            </date>
-            <text variable="genre" suffix=". "/>
-            <text macro="access"/>
           </group>
         </else-if>
 
