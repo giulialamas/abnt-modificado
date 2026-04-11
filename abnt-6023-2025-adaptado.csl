@@ -119,8 +119,8 @@
   </macro>
 
   <macro name="translator">
-    <names variable="translator" delimiter="; ">
-      <name delimiter="; " sort-separator=" " delimiter-precedes-last="always" prefix="Tradução: ">
+    <names variable="translator" delimiter="; " prefix="Tradução: ">
+      <name delimiter="; " sort-separator=" " delimiter-precedes-last="always">
         <name-part name="given" text-case="capitalize-first"/>
         <name-part name="family" text-case="capitalize-first"/>
       </name>
